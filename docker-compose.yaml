@@ -7,3 +7,7 @@ services:
     volumes:
       - ./esphome_data:/config
       - /etc/localtime:/etc/localtime:ro
+    #   - ./esphome_build:/build # Path for building ESPHome firmware
+
+    # environment:
+    #   - ESPHOME_BUILD_PATH=/build
