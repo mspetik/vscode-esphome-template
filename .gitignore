@@ -1,0 +1,10 @@
+# ESPHome runtime
+.esphome/
+
+# Secrets (generované init skriptem)
+secrets.yaml
+
+# Build artefakty
+*.bin
+*.elf
+*.log

@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ESPHome: Init schema",
+      "type": "shell",
+      "command": "docker compose run --rm esphome config esphome_data/$(basename ${workspaceFolder}).yaml"
+    },
+    {
+      "label": "ESPHome: Build",
+      "type": "shell",
+      "command": "make build"
+    },
+    {
+      "label": "ESPHome: Flash",
+      "type": "shell",
+      "command": "make flash"
+    }
+  ]
+}
