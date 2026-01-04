@@ -40,13 +40,13 @@ cd vscode-esphome-template
 2. Spusť init skript (vytvoří nový projekt vedle template):
 
 ```bash
-./init-esphome-project.sh kotelnik-2026
+./init-esphome-project.sh project-esp-doot
 ```
 
 3. Přejdi do nového projektu a otevři ho ve VS Code:
 
 ```bash
-cd kotelnik-2026
+cd project-esp-doot
 code .
 ```
 
@@ -55,10 +55,10 @@ code .
 ### Struktura výsledného projektu
 
 ```text
-kotelnik-2026/
+project-esp-doot/
 ├── docker-compose.yaml
 ├── esphome_data/
-│   ├── kotelnik-2026.yaml
+│   ├── project-esp-doot.yaml
 │   └── secrets.yaml
 ├── .gitignore
 ├── Makefile
