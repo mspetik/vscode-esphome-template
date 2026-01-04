@@ -28,6 +28,12 @@ Repozitář **není určen přímo k buildu firmware**, ale jako zdroj pro vytvo
 
 ---
 
+## Rozšíření pro VS Code
+
+Projekt obsahuje doporučená rozšíření pro VS Code.
+Při otevření pracovního prostoru VS Code nabídne jejich instalaci.
+---
+
 ### Vytvoření nového projektu
 
 1. Naklonuj template repozitář:
@@ -153,6 +159,12 @@ This repository itself is **not meant to build firmware**, but to generate new p
 
 ---
 
+### VS Code Extensions
+
+This project recommends several VS Code extensions.
+When opening the workspace, VS Code will prompt you to install them.
+
+---
 ### Creating a new project
 
 ```bash
