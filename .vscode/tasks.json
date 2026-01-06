@@ -2,9 +2,10 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "ESPHome: Init schema",
+      "label": "ESPHome: Validate config",
       "type": "shell",
-      "command": "docker compose run --rm esphome config esphome_data/$(basename ${workspaceFolder}).yaml"
+      "command": "docker compose run --rm esphome config kotelnik-2026.yaml",
+      "problemMatcher": []
     },
     {
       "label": "ESPHome: Build",
@@ -15,6 +16,15 @@
       "label": "ESPHome: Flash",
       "type": "shell",
       "command": "make flash"
+    },
+    {
+      "label": "ESPHome: Build + Flash",
+      "dependsOn": [
+        "ESPHome: Validate config",
+        "ESPHome: Build",
+        "ESPHome: Flash"
+      ],
+      "dependsOrder": "sequence"
     }
   ]
 }
