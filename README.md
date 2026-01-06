@@ -5,6 +5,15 @@ Navržený pro práci s Dockerem, Makefile a VS Code (autocomplete, tasks).
 
 ---
 
+### Co je součástí template
+
+* `docker-compose.yaml` s oficiálním ESPHome obrazem a mountem `./esphome_data` → `/config`
+* `Makefile`, který odvozuje název hlavního YAML souboru z názvu složky (např. `project-foo/project-foo.yaml`)
+* `.vscode/tasks.json` (validace, build, flash) a `.vscode/extensions.json` (doporučená rozšíření)
+* ukázková ESPHome konfigurace `esphome_data/vscode-esphome-template.yaml` s placeholderem `__DEVICE_NAME__`
+
+---
+
 ### Účel projektu
 
 Tento repozitář slouží jako **výchozí šablona (template)** pro nové ESPHome projekty.
@@ -64,7 +73,7 @@ code .
 project-esp-doot/
 ├── docker-compose.yaml
 ├── esphome_data/
-│   ├── project-esp-doot.yaml
+│   ├── project-esp-doot.yaml  # přejmenováno z template a doplněno o název zařízení
 │   └── secrets.yaml
 ├── .gitignore
 ├── Makefile
@@ -74,6 +83,7 @@ project-esp-doot/
 
 * název projektu = název zařízení = název YAML souboru
 * build adresář `.esphome/` vzniká automaticky a není verzován
+* init skript doplní placeholder `__DEVICE_NAME__` a vytvoří prázdné `secrets.yaml`
 
 ---
 
@@ -94,20 +104,15 @@ api_key: "CHANGE_ME"
 
 ---
 
-### Našeptávač (VS Code)
+### VS Code
 
-ESPHome YAML autocomplete funguje na základě dynamického schématu.
-Po otevření projektu spusť jednou:
+Rozšíření doporučená v `.vscode/extensions.json` se nabídnou automaticky (ESPHome, YAML, Docker).
+V Tasks (`Terminal → Run Task`) jsou předpřipraveny:
 
-```
-Terminal → Run Task → ESPHome: Init schema
-```
-
-Tento krok:
-
-* spustí `esphome config` nad hlavním YAML
-* inicializuje schema
-* zajistí plnohodnotné našeptávání i pro `!include` bloky
+* **ESPHome: Validate config** – `docker compose run --rm esphome config <název_složky>.yaml`
+* **ESPHome: Build** – `make build`
+* **ESPHome: Flash** – `make flash`
+* **ESPHome: Build + Flash** – sekvenční kombinace předešlých úloh
 
 ---
 
@@ -117,10 +122,12 @@ Tento krok:
 make build
 make flash
 make logs
+make clean
 ```
 
 * build i upload probíhá výhradně v Dockeru
 * není potřeba lokální instalace ESPHome
+* Makefile odvozuje název YAML souboru z názvu složky projektu
 
 ---
 
@@ -147,6 +154,15 @@ The goal is to provide:
 * comfortable VS Code workflow (autocomplete, tasks)
 
 This repository itself is **not meant to build firmware**, but to generate new projects using the init script.
+
+---
+
+### What's included
+
+* `docker-compose.yaml` using the official ESPHome image with `./esphome_data` mounted to `/config`
+* `Makefile` that derives the main YAML name from the folder name (e.g. `livingroom/livingroom.yaml`)
+* `.vscode/tasks.json` (validate, build, flash) and `.vscode/extensions.json` (recommended extensions)
+* sample ESPHome config `esphome_data/vscode-esphome-template.yaml` with the `__DEVICE_NAME__` placeholder
 
 ---
 
@@ -191,6 +207,10 @@ livingroom/
     └── tasks.json
 ```
 
+* project name = device name = YAML filename
+* the `.esphome/` build directory is created on demand and is not committed
+* init script replaces `__DEVICE_NAME__` and creates an empty `secrets.yaml`
+
 ---
 
 ### Secrets
@@ -203,15 +223,15 @@ File `esphome_data/secrets.yaml`:
 
 ---
 
-### Autocomplete (VS Code)
+### VS Code
 
-After opening the project, run once:
+Recommended extensions in `.vscode/extensions.json` are offered automatically (ESPHome, YAML, Docker).
+Tasks (`Terminal → Run Task`) are ready for:
 
-```
-Terminal → Run Task → ESPHome: Init schema
-```
-
-This initializes the ESPHome YAML schema required for proper autocomplete.
+* **ESPHome: Validate config** – `docker compose run --rm esphome config <folder_name>.yaml`
+* **ESPHome: Build** – `make build`
+* **ESPHome: Flash** – `make flash`
+* **ESPHome: Build + Flash** – sequential combination of the above
 
 ---
 
@@ -221,7 +241,12 @@ This initializes the ESPHome YAML schema required for proper autocomplete.
 make build
 make flash
 make logs
+make clean
 ```
+
+* build and upload run inside Docker
+* no local ESPHome install is needed
+* Makefile derives the YAML filename from the project folder name
 
 ---
 

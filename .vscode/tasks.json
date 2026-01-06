@@ -4,7 +4,7 @@
     {
       "label": "ESPHome: Validate config",
       "type": "shell",
-      "command": "docker compose run --rm esphome config kotelnik-2026.yaml",
+      "command": "docker compose run --rm esphome config ${workspaceFolderBasename}.yaml",
       "problemMatcher": []
     },
     {
